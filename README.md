@@ -2,6 +2,10 @@
 
 instructions for creating Database connections
 
+clone the repo to your local device
+
+firstly run npm install - yoou will need NODE installed on your machine.
+
 1. - create a .env.development file.
 2. - in .env.development file, write `PGDATABASE = db` (not as string) to connect to the development database.
 3. - create a .env.test file.
