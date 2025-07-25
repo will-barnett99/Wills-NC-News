@@ -87,3 +87,26 @@ describe('GET /api/users', () => {
   })
 })
 
+describe('GET /api/articles/:article_id', () => {
+  test('200: responds with an with an object with a key of article the value of which is an object with the correct properties', () => {
+    return request(app)
+    .get('/api/articles/2')
+    .expect(200)
+    .then(({body: {individualArticle}}) => {
+      expect(individualArticle.length).not.toBe(0)
+      individualArticle.forEach((article) => {
+         expect(article).toMatchObject({
+        author: expect.any(String),
+        title: expect.any(String),
+        article_id: expect.any(Number),
+        body: expect.any(String),
+        topic: expect.any(String),
+        created_at: expect.any(String),
+        votes: expect.any(Number),
+        article_img_url: expect.any(String),
+      })
+      })
+    })
+  })
+})
+
