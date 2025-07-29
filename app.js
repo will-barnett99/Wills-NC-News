@@ -1,7 +1,6 @@
 
 const express = require('express')
 const app = express()
-const port = 3000
 const getTopics = require('./controllers/topics-controller')
 const getArticles = require('./controllers/articles-controller')
 const getUsers = require('./controllers/users-controller')
@@ -56,4 +55,8 @@ app.use((err, req, res, next) => {
     res.status(500)
     res.send({msg: "Internal server error"})
 })
+
+
+app.use(express.static('public'));
+
 module.exports = app; 

@@ -143,5 +143,13 @@ describe('GET /api/articles/:article_id/comments', () => {
       })
     })
   })
+  test('400: responds with an error message when request made for an article_id of wrong data type', () => {
+    return request(app)
+    .get('/api/articles/not-a-number/comments')
+    .expect(404)
+    .then(({body}) => {
+      expect(body.msg).toBe('Bad Request')
+    })
+  })
 })
 

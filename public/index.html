@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NC News Endpoint API Guide</title>
+    <link rel="stylesheet" href="./style.css"/>
+</head>
+<body>
+    <header></header>
+    <h1>API guide to NC News</h1>
+    <p>This is a guide to the specific API endpoints for NC News.</p>
+
+    <main>
+        <section>
+            <h2>The Tables</h2>
+            <p>the main tables you can access are listed below.</p>
+            <ol>
+                <li>Articles</li>
+                <li>Topics</li>
+                <li>Users</li>
+                <li>Comments</li>
+            </ol>
+         </section>
+         <section>
+            <h2>Endpoint navigation</h2>
+            <p>Feel free to navigate to specific endpoints using the links below.</p>
+            <ul>
+            <nav>
+                <li><a href="/public/index.html">Article Endpoints</a></li>
+                <li><a href="/public/index.html">Topics Endpoints</a></li>
+                <li><a href="/public/index.html">Users Endpoints</a></li>
+                <li><a href="/public/index.html">Comments Endpoints</a></li>
+            </nav>
+            </ul>
+         </section>
+         <sections>
+            <h2>Article Endpoints</h2>
+            <p>Below is a table documenting relevant info for all Article Endpoints.</p>
+            <table class="article-endpoint-table">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Acceptable Queries</th>
+                    <th>Format of Request Body</th>
+                    <th>Example Response</th>
+                    <th>Additional Information</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>Used to retrieve article data from the database</td>
+                    <td>'SELECT * FROM articles' etc</td>
+                    <td>GET</td>
+                    <td>{articles: [{article....}, {article...}]}</td>
+                    <td>very good very nice</td>
+                </tr>
+            </table>
+         </sections>
+    </main>
+   
+    <footer></footer>
+    
+</body>
+</html>

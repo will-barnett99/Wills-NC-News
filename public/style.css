@@ -1,0 +1,22 @@
+h1 {
+    background-color: blueviolet;
+}
+
+section {
+    background-color: rgb(253, 68, 0);
+    color: blue;
+}
+
+.article-endpoint-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+}
+
+.article-endpoint-table thead tr {
+    background-color: #009879;
+    color: white;
+    text-align: left;
+    font-weight: bold;
+}

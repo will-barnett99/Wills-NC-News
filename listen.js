@@ -1,5 +1,5 @@
 const app = require('./app')
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+const port = 9009
+
+app.listen(port)
