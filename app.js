@@ -6,8 +6,9 @@ const getArticles = require('./controllers/articles-controller')
 const getUsers = require('./controllers/users-controller')
 const getArticleById = require('./controllers/articleID-controller')
 const getCommentsByArticleId = require('./controllers/comments-controller')
+const cors = require('cors');
 
-
+app.use(cors());
 
 
 
