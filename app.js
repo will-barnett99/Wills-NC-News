@@ -4,13 +4,13 @@ const app = express()
 const getTopics = require('./controllers/topics-controller')
 const getArticles = require('./controllers/articles-controller')
 const getUsers = require('./controllers/users-controller')
-const getArticleById = require('./controllers/articleID-controller')
+const {getArticleById, updateArticleVotes} = require('./controllers/articleID-controller')
 const getCommentsByArticleId = require('./controllers/comments-controller')
 const cors = require('cors');
 
 app.use(cors());
 
-
+app.use(express.json())
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -26,6 +26,8 @@ app.get('/api/articles/:article_id/comments', getCommentsByArticleId)
 
 
 app.get('/api/users', getUsers)
+
+app.patch('/api/articles/:article_id', updateArticleVotes)
 
 
 app.use((req, res) => { 
