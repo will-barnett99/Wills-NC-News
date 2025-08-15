@@ -18,6 +18,8 @@ const patchUpdatedArticleVotes = (article_id, inc_votes) => {
     .then(({rows}) => {
         const article = rows[0];
 
+        console.log(article)
+
         return article
     })
 }
