@@ -179,3 +179,29 @@ describe('PATCH /api/articles/:article_id', () => {
   
 })
 
+describe('POST /api/articles/:article_id/comments', () => {
+  test.only('201: respond with a new posted comment from a given user', () => {
+    const newComment = {
+      username: "lurker",
+      body: "this is a new comment!"
+    }
+    return request(app)
+    .post('/api/articles/2/comments')
+    .send(newComment)
+    .expect(201)
+    .then(({body}) => (
+      expect(body.comment).toMatchObject(
+        {
+          comment_id: expect.any(Number),
+          votes: 0,
+          created_at: expect.any(String),
+          author: 'lurker',
+          body: "this is a new comment!",
+          article_id: 2,
+        }
+      )
+    ))
+
+  })
+} )
+

@@ -9,11 +9,9 @@ const getArticleById = (req, res, next) => {
 }
 
 const updateArticleVotes = (req, res, next) => {
-    
-    console.log(req.body)
 
     const {inc_votes} = req.body
-    console.log(req.params)
+
     const {article_id} = req.params;
 
     return patchUpdatedArticleVotes(article_id, inc_votes).then((votesOnArticle) => {
