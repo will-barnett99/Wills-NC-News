@@ -180,7 +180,7 @@ describe('PATCH /api/articles/:article_id', () => {
 })
 
 describe('POST /api/articles/:article_id/comments', () => {
-  test.only('201: respond with a new posted comment from a given user', () => {
+  test('201: respond with a new posted comment from a given user', () => {
     const newComment = {
       username: "lurker",
       body: "this is a new comment!"
@@ -204,4 +204,16 @@ describe('POST /api/articles/:article_id/comments', () => {
 
   })
 } )
+
+
+describe('DELETE /api/comments/:comment_id', () => {
+  test.only('204: responds with a successful deletion of a comment by comment id', () => {
+    return request(app)
+    .delete('/api/comments/3')
+    .expect(204)
+    .then(res => {
+      expect(res.text).toBe('')
+    })
+  })
+})
 

@@ -6,6 +6,7 @@ const getArticles = require('./controllers/articles-controller')
 const getUsers = require('./controllers/users-controller')
 const {getArticleById, updateArticleVotes} = require('./controllers/articleID-controller')
 const {getCommentsByArticleId, updateCommentsbyArticleId} = require('./controllers/comments-controller')
+const deleteCommentByCommentId = require('./controllers/commentID-controller')
 const cors = require('cors');
 
 app.use(cors({origin: 'https://wills-news.netlify.app'}));
@@ -30,6 +31,8 @@ app.get('/api/users', getUsers)
 app.post('/api/articles/:article_id/comments', updateCommentsbyArticleId)
 
 app.patch('/api/articles/:article_id', updateArticleVotes)
+
+app.delete('/api/comments/:comment_id', deleteCommentByCommentId)
 
 
 
