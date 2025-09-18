@@ -67,6 +67,58 @@ describe("GET /api/articles", () => {
       })
     })
   })
+  test("200: should sort by 'title' in default/descending order", () => {
+    return request(app)
+    .get('/api/articles?sort_by=title')
+    .expect(200)
+    .then(({body}) => {
+      const articles = body.articles;
+      expect(articles).toBeSortedBy("title", {descending: true})
+    })
+  })
+  test("200: should sort by 'votes' in ascending order", () => {
+    return request(app)
+    .get('/api/articles?sort_by=votes&order=asc')
+    .expect(200)
+    .then(({body}) => {
+      const articles = body.articles;
+      expect(articles).toBeSortedBy("votes", {ascending: true})
+    })
+  })
+  test('200: should default to created_at descending', () => {
+    return request(app)
+    .get('/api/articles')
+    .expect(200)
+    .then(({body}) => {
+      const articles = body.articles;
+      expect(articles).toBeSortedBy("created_at", {descending: true})
+    })
+  })
+  test('200: should sort by author ascending', () => {
+    return request(app)
+    .get('/api/articles?sort_by=author&order=asc')
+    .expect(200)
+    .then(({body}) => {
+      const articles = body.articles;
+      expect(articles).toBeSortedBy('author', {ascending: true})
+    })
+  })
+  test('400: invalid sort_by column', () => {
+    return request(app)
+    .get('/api/articles?sort_by=eggs')
+    .expect(400)
+    .then(({body}) => {
+      expect(body.msg).toBe('Invalid sort_by column')
+    })
+  })
+  test('400: invalid order value', () => {
+    return request(app)
+    .get('/api/articles?order=sideways')
+    .expect(400)
+    .then(({body}) => {
+      expect(body.msg).toBe('Invalid order value')
+    })
+  })
 })
 
 describe('GET /api/users', () => {
@@ -207,7 +259,7 @@ describe('POST /api/articles/:article_id/comments', () => {
 
 
 describe('DELETE /api/comments/:comment_id', () => {
-  test.only('204: responds with a successful deletion of a comment by comment id', () => {
+  test('204: responds with a successful deletion of a comment by comment id', () => {
     return request(app)
     .delete('/api/comments/3')
     .expect(204)
@@ -216,4 +268,7 @@ describe('DELETE /api/comments/:comment_id', () => {
     })
   })
 })
+
+
+
 
