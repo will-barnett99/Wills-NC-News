@@ -1,7 +1,7 @@
 const db = require('../db/connection');
 
 
-const fetchArticles = (sort_by = 'created_at', order = 'desc') => {
+const fetchArticles = (sort_by = 'created_at', order = 'desc', topic) => {
 
     const validColumns = [
         'article_id',
@@ -16,6 +16,8 @@ const fetchArticles = (sort_by = 'created_at', order = 'desc') => {
 
     const validOrders = ['asc', 'desc']
 
+    //const validTopics = ['mitch', 'cats', 'paper']
+
     if(!validColumns.includes(sort_by)) {
         return Promise.reject({status:400, msg: 'Invalid sort_by column'});
     }
@@ -25,7 +27,7 @@ const fetchArticles = (sort_by = 'created_at', order = 'desc') => {
         return Promise.reject({status:400, msg:'Invalid order value'})
     }
 
-    return db.query(`SELECT articles.article_id,
+    let queryString = `SELECT articles.article_id,
          articles.title,
          articles.topic,
          articles.author, 
@@ -34,9 +36,20 @@ const fetchArticles = (sort_by = 'created_at', order = 'desc') => {
          articles.article_img_url, 
          COUNT(comments.article_id)::INT AS "comment_count" 
          FROM articles 
-         LEFT JOIN comments ON comments.article_id = articles.article_id 
-         GROUP BY articles.article_id
-         ORDER BY ${sort_by} ${order};`).then(({rows: articles}) => {
+         LEFT JOIN comments ON comments.article_id = articles.article_id`
+
+    const queryValues = []
+
+    if(topic) {
+        queryValues.push(topic);
+        queryString += ` WHERE articles.topic = $1`;
+    }
+
+    queryString += `
+    GROUP BY articles.article_id
+    ORDER BY ${sort_by} ${order};`
+
+    return db.query(queryString, queryValues).then(({rows: articles}) => {
         return articles;
     });
     

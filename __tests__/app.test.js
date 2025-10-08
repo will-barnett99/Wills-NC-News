@@ -108,7 +108,7 @@ describe("GET /api/articles", () => {
     .get('/api/articles?sort_by=eggs')
     .expect(400)
     .then(({body}) => {
-      expect(body.msg).toBe('Invalid sort_by column')
+      expect(body.msg).toBe('Invalid sort_by column', {ascending: true})
     })
   })
   test('400: invalid order value', () => {
@@ -117,6 +117,15 @@ describe("GET /api/articles", () => {
     .expect(400)
     .then(({body}) => {
       expect(body.msg).toBe('Invalid order value')
+    })
+  })
+  test('200: successfully filters articles by given topic value', () => {
+    return request(app)
+    .get('/api/articles?topic=cats')
+    .expect(200)
+    .then(({body}) => {
+      const articles = body.articles
+      expect(articles).toBeSortedBy("topic")
     })
   })
 })
