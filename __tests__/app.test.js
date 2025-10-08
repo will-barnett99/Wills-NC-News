@@ -128,6 +128,22 @@ describe("GET /api/articles", () => {
       expect(articles).toBeSortedBy("topic")
     })
   })
+  test('400: returns error if topic does not exist', () => {
+    return request(app)
+    .get('/api/articles?topic=dragons')
+    .expect(400)
+    .then(({body}) => {
+      expect(body.msg).toBe('Invalid topic')
+    })
+  })
+  test('400: returns error if topic query is numeric', () => {
+    return request(app)
+    .get('/api/articles?topic=123')
+    .expect(400)
+    .then(({body}) => {
+      expect(body.msg).toBe('Invalid topic')
+    })
+  })
 })
 
 describe('GET /api/users', () => {

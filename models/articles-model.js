@@ -16,7 +16,7 @@ const fetchArticles = (sort_by = 'created_at', order = 'desc', topic) => {
 
     const validOrders = ['asc', 'desc']
 
-    //const validTopics = ['mitch', 'cats', 'paper']
+    const validTopics = ['mitch', 'cats', 'paper']
 
     if(!validColumns.includes(sort_by)) {
         return Promise.reject({status:400, msg: 'Invalid sort_by column'});
@@ -25,6 +25,10 @@ const fetchArticles = (sort_by = 'created_at', order = 'desc', topic) => {
     const lowerOrder = order.toLowerCase();
     if(!validOrders.includes(lowerOrder)){
         return Promise.reject({status:400, msg:'Invalid order value'})
+    }
+
+    if(topic && !validTopics.includes(topic)){
+        return Promise.reject({status:400, msg:'Invalid topic'})
     }
 
     let queryString = `SELECT articles.article_id,
