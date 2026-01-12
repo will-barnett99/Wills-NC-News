@@ -13,6 +13,7 @@ const fetchArticleById = (article_id) => {
             
         } 
        const article = rows[0];
+       console.log(article)
        return article;
         
     })
