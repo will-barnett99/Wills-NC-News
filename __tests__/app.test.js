@@ -294,6 +294,27 @@ describe('DELETE /api/comments/:comment_id', () => {
   })
 })
 
+describe('GET /api/articles/:article_id', () => {
+  test('200: responds with a successful count of all comments to a related article', () => {
+    return request(app)
+    .get('/api/articles/1')
+    .expect(200)
+    .then(({body}) => {
+      const {individualArticle} = body;
+      expect(individualArticle).toMatchObject({
+        article_id: 1,
+        title: 'Living in the shadow of a great man',
+        topic: 'mitch',
+        author: 'butter_bridge',
+        body: 'I find this existence challenging',
+        votes: 100,
+        article_img_url: expect.any(String),
+        comment_count: expect.any(Number)
+      })
+    })
+  })
+})
+
 
 
 
